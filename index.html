@@ -30,33 +30,108 @@
       type="text/css"
       id="wb-page-stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700&subset=latin"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i&subset=cyrillic,cyrillic-ext,latin,latin-ext,vietnamese"
-      rel="stylesheet"
-      type="text/css"
-    />
+    <!-- Custom styles -->
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/bundle.style.css" rel="stylesheet" type="text/css" />
 
-    <!-- Centralized image paths: edit here only -->
+    <!-- Profile styles with serif font -->
+    <style>
+      body {
+        font-family: Georgia, "Times New Roman", Times, serif;
+      }
+      
+      .profile-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        cursor: pointer;
+        padding: 10px;
+        font-family: Georgia, "Times New Roman", Times, serif;
+      }
+      
+      .profile-image {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #fff;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      
+      .profile-info {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .username-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 5px;
+      }
+      
+      .username {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        margin: 0;
+        font-family: Georgia, "Times New Roman", Times, serif;
+      }
+      
+      .verified-badge {
+        width: 22px;
+        height: 22px;
+        fill: #1d9bf0;
+      }
+      
+      .stats {
+        display: flex;
+        gap: 20px;
+        font-size: 14px;
+        color: #666;
+        font-family: Georgia, "Times New Roman", Times, serif;
+      }
+      
+      .stat-item {
+        margin: 0;
+      }
+
+      .wb_button {
+        font-family: Georgia, "Times New Roman", Times, serif !important;
+      }
+    </style>
+
+    <!-- Centralized configuration: edit here only -->
     <script>
-      const IMG_PATHS = {
-        logo: "images/logo.png",
-        promo: "images/promo.gif",
-        slide1: "images/slide1.jpg",
-        slide2: "images/slide2.jpg"
+      const SITE_CONFIG = {
+        username: "LUCY MAY",
+        images: {
+          profile: "images/profile.jpg",
+          promo: "images/promo.gif",
+          slide1: "images/slide1.jpg",
+          slide2: "images/slide2.jpg"
+        },
+        stats: {
+          photos: 492,
+          videos: 832
+        }
       };
 
       window.addEventListener("DOMContentLoaded", () => {
-        document.getElementById("logoImg").src = IMG_PATHS.logo;
-        document.getElementById("promoImg").src = IMG_PATHS.promo;
+        // Set images
+        document.getElementById("profileImg").src = SITE_CONFIG.images.profile;
+        document.getElementById("promoImg").src = SITE_CONFIG.images.promo;
 
         const slides = document.querySelectorAll(".slide-img");
-        if (slides[0]) slides[0].src = IMG_PATHS.slide1;
-        if (slides[1]) slides[1].src = IMG_PATHS.slide2;
+        if (slides[0]) slides[0].src = SITE_CONFIG.images.slide1;
+        if (slides[1]) slides[1].src = SITE_CONFIG.images.slide2;
+
+        // Set username
+        document.getElementById("username").textContent = SITE_CONFIG.username;
+
+        // Set stats
+        document.getElementById("photoCount").textContent = SITE_CONFIG.stats.photos;
+        document.getElementById("videoCount").textContent = SITE_CONFIG.stats.videos;
       });
     </script>
 
@@ -96,7 +171,7 @@
             data-plugin="LayoutElement"
           >
             <div class="wb_content wb-layout-horizontal">
-              <figure
+              <div
                 id="a1987ab43d6100e338dcaeac8fed2840"
                 class="wb_element wb_element_picture"
                 data-plugin="Picture"
@@ -104,15 +179,29 @@
                 <a
                   href="javascript:void(0);"
                   data-popup="wb_popup:Jess/?wbPopupMode=1;w=400;h=600;pagePopup=1;"
+                  class="profile-container"
                 >
                   <img
-                    id="logoImg"
+                    id="profileImg"
+                    class="profile-image"
                     loading="lazy"
-                    alt="Site Logo"
+                    alt="Profile Picture"
                     src=""
                   />
+                  <div class="profile-info">
+                    <div class="username-container">
+                      <h2 id="username" class="username"></h2>
+                      <svg class="verified-badge" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                    </div>
+                    <div class="stats">
+                      <p class="stat-item"><strong id="photoCount"></strong> photos</p>
+                      <p class="stat-item"><strong id="videoCount"></strong> videos</p>
+                    </div>
+                  </div>
                 </a>
-              </figure>
+              </div>
             </div>
           </div>
 
@@ -167,7 +256,7 @@
                     fill="currentColor"
                     style='font-family: "FontAwesome"'
                   >
-                    
+                    
                   </text>
                 </svg>
                 &nbsp;Explicit Content
@@ -200,7 +289,7 @@
                     fill="currentColor"
                     style='font-family: "FontAwesome"'
                   >
-                    
+                    
                   </text>
                 </svg>
                 &nbsp;+18 Livestream
@@ -254,4 +343,3 @@
     </div>
   </body>
 </html>
-
